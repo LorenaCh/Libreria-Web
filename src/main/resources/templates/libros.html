@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Libros</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="/estilos/plantilla.css" rel="stylesheet" type="text/css" />
+        <link href="/estilos/body-table.css" rel="stylesheet" type="text/css" />
+
+    </head>
+    <body>
+        <div class="contenedor-nav" th:replace="layout/plantilla :: header"/>   
+        <div class="conteiner-crear">
+            <a th:href="@{/libro/agregar}">Crear Libro</a>
+        </div>
+        <div class="conteiner-table" th:if="${libros != null and !libros.empty}">
+            <table>
+                <tr class="conteiner-table__header">
+                    <th>ISBN</th>
+                    <th>Titulo</th>
+                    <th>Año</th>
+                    <th>Ejemplares</th>
+                    <th>+/-</th>
+                    <th>Ejemplares Prestados</th>
+                    <th>Ejemplares Restantes</th>
+                    <th>Alta</th>
+                    <th>Autor</th>
+                    <th>Editorial</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr class="conteiner-table__rows" th:each="libro : ${libros}">
+                    <td th:text="${libro.isbn}">Mostrar ISBN</td>
+                    <td th:text="${libro.titulo}">Mostrar Titulo</td>
+                    <td th:text="${libro.anio}">Mostrar Año</td>
+                    <td>
+                        <label th:text="${libro.ejemplares}">Mostrar Ejemplares</label>
+                    </td>
+                    <td style="width: 80px;">
+                        <div style="background-color: green;margin-top: 3px;">
+                            <a th:href="@{/libro/aumentarLibro(isbn=${libro.isbn})}" style="margin:0;text-decoration: none;color:white;font-size:23px;padding-left: 30px;padding-right:30px">
+                                <!-- <img src="/estilos/icons/positivo-verde.ico" style="height: 20px;"/>-->
+                                +
+                            </a>
+                        </div>
+                        <div style="background-color:red;margin-bottom: 3px;" th:if="${libro.ejemplares} > 0 and ${libro.ejemplaresRestantes > 0}">
+                            <a th:href="@{/libro/disminuirLibro(isbn=${libro.isbn})}" style="margin:0;text-decoration: none;color:white;font-size:23px;padding-left: 37px;padding-right:37px;">-
+                                <!--<img src="/estilos/icons/negativo-rojo.svg" style="height: 20px;" />-->
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <label th:text="${libro.ejemplaresPrestados}">Mostrar Ejemplares</label>
+                        <!--<img src="/estilos/icons/positivo-verde.ico" style="height: 13px;"/>
+                        <img src="/estilos/icons/negativo-rojo.svg" style="height: 13px;" />-->
+                    </td>
+                    <td>
+                        <label th:text="${libro.ejemplaresRestantes}">Mostrar Ejemplares Restantes</label>
+                        <!--<img src="/estilos/icons/positivo-verde.ico" style="height: 13px;"/>
+                        <img src="/estilos/icons/negativo-rojo.svg" style="height: 13px;" />-->
+                    </td>
+                    <td class="conteiner-table__rows-alta">
+                        <img  th:if="${libro.alta == true}" src="/estilos/icons/circulo-verde.ico" alt="insertar SVG con la etiqueta image" />
+                        <a th:if="${libro.alta == true}" th:href="@{/libro/darBaja(isbn=${libro.isbn})}">
+                            <img src="/estilos/icons/triangulo-rojo.png" style="height: 13px;" alt="insertar SVG con la etiqueta image" />
+                        </a>
+                        <img  th:if="${libro.alta == false}" src="/estilos/icons/circulo-rojo.ico" alt="insertar SVG con la etiqueta image" />
+                        <a th:if="${libro.alta == false}" th:href="@{/libro/darAlta(isbn=${libro.isbn})}">
+                            <img src="/estilos/icons/triangulo-verde.png" alt="insertar SVG con la etiqueta image" />
+                        </a>
+                    </td>
+                    <td th:text="${libro.autor.nombre}">Mostrar Autor</td>
+                    <td th:text="${libro.editorial.nombre}">Mostrar Editorial</td>
+                    <td><a class="conteiner-table__rows-eliminar" th:href="@{/libro/eliminar(isbn=${libro.isbn})}" th:text="Eliminar"/></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${libros == null or libros.empty}">
+            La lista de autores esta vacia
+        </div>
+        <div th:if="${error} != null">
+            <label>Error!</label>
+        </div>
+    </body>
+</html>

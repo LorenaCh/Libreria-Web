@@ -1,0 +1,104 @@
+.contenedor-principal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contenedor-principal-cuerpo{
+    width:40%;
+    border-style: groove;
+    margin: 50px;
+    border-radius: 20px;
+    align-items: center;
+    display:flex;
+    flex-direction: column;
+    background-color: #e5e9ea;
+}
+
+.contenedor-principal__titulo{
+    margin: 20px;
+    color:#3399ff;
+}
+
+.contenedor-principal__formulario{
+    display:flex;
+    flex-direction: column;
+    font-family: Gill Sans, sans-serif;
+    align-items: center;
+}
+
+.contenedor-principal__formulario-nombre{
+    padding-left: 0;
+    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor-principal__formulario-nombre-entrada{
+    display:flex;
+    flex-direction: row;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.contenedor-principal__formulario-nombre label{
+    padding-right: 10px;
+}
+.contenedor-principal__formulario-nombre input{
+    height: 30px;
+    border-radius: 8px;
+    border-color: #cccccc;
+}
+
+.contenedor-principal__formulario-nombre-error{
+    color: red;
+    font-family: Comic Sans MS, Comic Sans, cursive;
+}
+
+.contenedor-principal__formulario-boton{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-content: center;
+}
+
+.contenedor-principal__formulario-boton button{
+    color: white;
+    border:none;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+#aceptar.contenedor-principal__formulario-boton{
+    width: 30%;
+    text-align: center;
+    padding: 10px;
+    justify-content: center;
+    background-color: #3399ff;
+    border-radius: 8px;
+}
+
+#cancelar.contenedor-principal__formulario-boton{
+    width: 30%;
+    padding: 10px;
+    height: 36px;
+    justify-content: center;
+    text-decoration: none;
+    color:white;
+    background-color: #3399ff;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+#cancelar.contenedor-principal__formulario-boton:hover{
+    background-color: #0099cc;
+}
+
+#aceptar.contenedor-principal__formulario-boton:hover{
+    background-color: #0099cc;
+}

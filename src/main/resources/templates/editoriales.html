@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Libreria</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width-device-width, initial-scale=1.0" />
+        <mvc:resources mapping="/static/**" location="/static/" />
+        <link href="/estilos/plantilla.css" rel="stylesheet" type="text/css" />
+        <link href="/estilos/body-table.css" rel="stylesheet" type="text/css" />
+
+    </head>
+    <body>
+        <div class="contenedor-nav" th:replace="layout/plantilla :: header"/>   
+        <div class="conteiner-crear">
+            <a th:href="@{/editorial/agregar}">Crear Editorial </a>
+        </div>
+        <div class="conteiner-table" th:if="${editoriales != null and !editoriales.empty}">
+            <table>
+                <tr class="conteiner-table__header">
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Alta</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr class="conteiner-table__rows" th:each="editorial : ${editoriales}">
+                    <td th:text="${editorial.id}">Mostrar Id</td>
+                    <td th:text="${editorial.nombre}">Mostrar Nombre</td>
+                    <td class="conteiner-table__rows-alta" >
+                        <img  th:if="${editorial.alta == true}" src="/estilos/icons/check-green.png" alt="insertar SVG con la etiqueta image"/>
+                        <img  th:if="${editorial.alta == false}" src="/estilos/icons/cross-red.png" alt="insertar SVG con la etiqueta image"/>
+                    </td>
+                    <td><a class="conteiner-table__rows-editar" th:href="@{/editorial/editar(id=${editorial.id})}" th:text="Editar"/></td>
+                    <td><a class="conteiner-table__rows-eliminar" th:href="@{/editorial/eliminar(id=${editorial.id})}" th:text="Eliminar"/></td>
+                </tr>
+            </table>
+        </div>
+        <div th:if="${editoriales == null or editoriales.empty}">
+            La lista de autores esta vacia
+        </div>
+        <footer th:replace="layout/plantilla :: footer"></footer>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="/estilos/plantilla.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="contenedor-nav" th:replace="layout/plantilla :: header" />
+        <div class="contenedor-principal">
+            <div class="contenedor-principal-cuerpo">
+                <div class="contenedor-principal__titulo">
+                    <h2>Crear Libro</h2>
+                </div>
+                <form class="contenedor-principal__formulario" th:action="@{/libro/guardar}" method="post" >
+                    <input type="hidden" name="isbn" />
+                    <div class="contenedor-principal__formulario-titulo">
+                        <div class="contenedor-principal__formulario-titulo-entrada">
+                        <label for="titulo" class="form-label">Titulo:</label>
+                        <input type="text" class="form-control" id="titulo" name="titulo"/>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="contenedor-principal__formulario-anio-entrada">
+                        <label for="anio" class="form-label">Año:</label>
+                        <input type="number" class="form-control" id="anio" name="anio" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="contenedor-principal__formulario-ejemplares-entrada">
+                        <label for="ejemplares" class="form-label">Ejemplares:</label>
+                        <input type="number" class="form-control" id="ejemplares" name="ejemplares"/>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="contenedor-principal__formulario-ejemplaresPrestados-entrada">
+                        <label for="ejemplaresPrestados" class="form-label">Ejemplares prestados:</label>
+                        <input type="number" class="form-control" id="ejemplaresPrestados" name="ejemplaresPrestados"/>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="contenedor-principal__formulario-ejemplaresRestantes-entrada">
+                        <label for="ejemplaresRestantes" class="form-label">Ejemplares Restantes:</label>
+                        <input type="number" class="form-control" id="ejemplaresRestantes" name="ejemplaresRestantes"/>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="autor">Autor:</label>
+                        <select id="autor" name="autorId">
+                            <option th:each="a : ${autores}" th:value="${a.id}" th:text="${a}">text</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="editorial">Editorial:</label>
+                        <select id="editorial" name="editorialId">
+                            <option th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial}">text</option>
+                        </select>
+                    </div>
+                    <div class="contenedor-principal__formulario-boton">
+                        <a th:href="@{/libro}" id="cancelar" class="contenedor-principal__formulario-boton">Cancelar</a>
+                        <button type="submit" id="aceptar" class="contenedor-principal__formulario-boton">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

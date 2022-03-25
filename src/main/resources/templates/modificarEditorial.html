@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <mvc:resources mapping="/static/**" location="/static/" />
+        <link href="/estilos/plantilla.css" rel="stylesheet" type="text/css" />
+        <link href="/estilos/form-autor-editorial.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="contenedor-nav" th:replace="layout/plantilla :: header" />
+        <div class="contenedor-principal">
+            <div class="contenedor-principal-cuerpo">
+                <div class="contenedor-principal__titulo">
+                    <h2>Crear Editorial</h2>
+                </div>
+                <form class="contenedor-principal__formulario" th:action="@{/editorial/guardar}" method="post" th:object="${editorial}">
+                    <input type="hidden" name="id" th:field="*{id}"/>
+                    <div class="contenedor-principal__formulario-nombre">
+                        <div class="contenedor-principal__formulario-nombre-entrada">
+                        <label for="nombre" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" th:field="*{nombre}"/>
+                        </div>
+                        <div class="contenedor-principal__formulario-nombre-error">
+                            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error del nombre</span>
+                        </div>
+                    </div>
+                    <div class="contenedor-principal__formulario-alta" th:if="${editorial.id != null}">
+                        <input class="form-check-input" type="checkbox" name="alta" th:field="*{alta}" />
+                        <label class="form-check-label" for="alta">Activo</label>
+                    </div>
+                    <input th:if="${editorial.id == null}" type="hidden" class="form-control" id="alta" th:field="*{alta}"/>
+                    <div class="contenedor-principal__formulario-boton">
+                        <a th:href="@{/editorial}" id="cancelar" class="contenedor-principal__formulario-boton">Cancelar</a>
+                        <button type="submit" id="aceptar" class="contenedor-principal__formulario-boton">Aceptar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

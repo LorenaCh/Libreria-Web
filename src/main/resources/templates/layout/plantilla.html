@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Plantilla</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"  />
+            <link href="/estilos/plantilla.css" rel="stylesheet" type="text/css" />    
+    </head>
+    <body>
+        <div class="contenedor-nav" th:fragment="header">
+                <div class="contenedor-nav__item-logo">
+                    <img class="contenedor-nav__item-img" src="/estilos/icons/libros.png" alt="insertar SVG con la etiqueta image"/>
+                    <p class="contenedor-nav__item-text">
+                        Libreria Web
+                    </p>
+                </div>
+                <div class="contenedor-nav__item">
+                    <ul class="contenedor-nav__item-lista">
+                        <li><a th:href="@{/libro}">Libros</a></li>
+                        <li><a th:href="@{/autor}">Autores</a></li>
+                        <li><a th:href="@{/editorial}">Editoriales</a></li>
+                    </ul>
+                </div>
+        </div>
+        <footer th:fragment="footer">
+            <p>Esto es un footer</p>
+        </footer>
+    </body>
+</html>
