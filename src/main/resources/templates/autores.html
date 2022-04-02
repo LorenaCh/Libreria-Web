@@ -12,16 +12,16 @@
     <body>
         <div class="contenedor-nav" th:replace="layout/plantilla :: header"/>   
         <div class="conteiner-crear">
-            <a th:href="@{/autor/agregar}">Crear Autor </a>
+            <a th:href="@{/autor/agregar}">[[#{autores.crear}]]</a>
         </div>
         <div class="conteiner-table" th:if="${autores != null and !autores.empty}">
             <table>
                 <tr class="conteiner-table__header">
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Alta</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>[[#{autores.id}]]</th>
+                    <th>[[#{autores.nombre}]]</th>
+                    <th>[[#{autores.alta}]]</th>
+                    <th>[[#{autores.editar}]]</th>
+                    <th>[[#{autores.eliminar}]]</th>
                 </tr>
                 <tr class="conteiner-table__rows" th:each="autor : ${autores}">
                     <td th:text="${autor.id}">Mostrar Id</td>
@@ -30,13 +30,13 @@
                         <img  th:if="${autor.alta == true}" src="/estilos/icons/check-green.png" alt="insertar SVG con la etiqueta image"/>
                         <img  th:if="${autor.alta == false}" src="/estilos/icons/cross-red.png" alt="insertar SVG con la etiqueta image"/>
                     </td>
-                    <td><a class="conteiner-table__rows-editar" th:href="@{/autor/editar(id=${autor.id})}" th:text="Editar"/></td>
-                    <td><a class="conteiner-table__rows-eliminar" th:href="@{/autor/eliminar(id=${autor.id})}" th:text="Eliminar"/></td>
+                    <td><a class="conteiner-table__rows-editar" th:href="@{/autor/editar(id=${autor.id})}" />[[#{autores.editar}]]</td>
+                    <td><a class="conteiner-table__rows-eliminar" th:href="@{/autor/eliminar(id=${autor.id})}"/>[[#{autores.eliminar}]]</td>
                 </tr>
             </table>
         </div>
         <div th:if="${autores == null or autores.empty}">
-            La lista de autores esta vacia
+            [[#{autores.lista-vacia}]]
         </div>
         <footer th:replace="layout/plantilla :: footer"></footer>
     </body>

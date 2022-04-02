@@ -38,7 +38,7 @@ public class AutorControlador {
     public String crearAutor(Autor autor, Model model){
         autor.setAlta(true);
         model.addAttribute("autor",autor);
-        return "crearAutor";
+        return "modificarAutor";
     }
     
     @PostMapping("/guardar")
@@ -61,13 +61,13 @@ public class AutorControlador {
         model.addAttribute("autor",autor);
         return "modificarAutor";
     }
-    
+    /*
     @GetMapping("/editar/{id}")
     public String editarAutor2(Autor autor,Model model){
         autor = autorService.buscarPorId(autor);
         model.addAttribute("autorEdit", autor);
         return "editarAutor";
-    }
+    }*/
     
     @GetMapping("/eliminar") //localhost:8080/autor/eliminar
     public String eliminarAutor(Autor autor){

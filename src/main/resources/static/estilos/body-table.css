@@ -12,7 +12,7 @@
 .conteiner-crear a{
     color:white;
     text-decoration: none;
-    background-color: #3399ff;
+    background-color: #9999ff;
     padding: 8px;
     border-radius: 7px;
 }
@@ -46,9 +46,19 @@
 .conteiner-table__rows-eliminar:hover{
     background-color: #cc0000;
 }
+.conteiner-table__rows-editar{
+    text-decoration: none;
+    color:white;
+    background-color: #9999ff;
+    border-radius: 8px;
+    padding: 5px;
+}
 
+.conteiner-table__rows-editar:hover{
+    background-color: #9966ff;
+}
 .conteiner-table th{
-    background-color: #3399ff;
+    background-color: #9999ff;
     color:white;
 }
 

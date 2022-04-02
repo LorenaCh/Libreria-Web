@@ -12,14 +12,14 @@
                 <div class="contenedor-nav__item-logo">
                     <img class="contenedor-nav__item-img" src="/estilos/icons/libros.png" alt="insertar SVG con la etiqueta image"/>
                     <p class="contenedor-nav__item-text">
-                        Libreria Web
+                        [[#{plantilla.logo}]]
                     </p>
                 </div>
                 <div class="contenedor-nav__item">
                     <ul class="contenedor-nav__item-lista">
-                        <li><a th:href="@{/libro}">Libros</a></li>
-                        <li><a th:href="@{/autor}">Autores</a></li>
-                        <li><a th:href="@{/editorial}">Editoriales</a></li>
+                        <li><a th:href="@{/libro}">[[#{plantilla.libros}]]</a></li>
+                        <li><a th:href="@{/autor}">[[#{plantilla.autores}]]</a></li>
+                        <li><a th:href="@{/editorial}">[[#{plantilla.editoriales}]]</a></li>
                     </ul>
                 </div>
         </div>

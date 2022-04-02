@@ -26,11 +26,9 @@ public class Libro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long isbn;
-    
+    @NotEmpty
     private String titulo;
-    //@Pattern(regexp="[0-9]{4}",message="El año debe contener 4 digitos")
     private Integer anio;
-    //@Pattern(regexp="[0-9]+",message="Los ejemplos debe contener almenos un digito")
     private Integer ejemplares;
     private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;

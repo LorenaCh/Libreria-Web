@@ -37,13 +37,13 @@
                         <label th:text="${libro.ejemplares}">Mostrar Ejemplares</label>
                     </td>
                     <td style="width: 80px;">
-                        <div style="background-color: green;margin-top: 3px;">
-                            <a th:href="@{/libro/aumentarLibro(isbn=${libro.isbn})}" style="margin:0;text-decoration: none;color:white;font-size:23px;padding-left: 30px;padding-right:30px">
+                        <div style="background-color: green;margin-top: 3px;border-radius: 20px;">
+                            <a th:href="@{/libro/aumentarLibro(isbn=${libro.isbn})}" style="margin:0;text-decoration: none;color:white;font-size:23px;padding-left: 30px;padding-right:30px;">
                                 <!-- <img src="/estilos/icons/positivo-verde.ico" style="height: 20px;"/>-->
                                 +
                             </a>
                         </div>
-                        <div style="background-color:red;margin-bottom: 3px;" th:if="${libro.ejemplares} > 0 and ${libro.ejemplaresRestantes > 0}">
+                        <div style="background-color:red;margin-bottom: 3px;border-radius: 20px;" th:if="${libro.ejemplares} > 0 and ${libro.ejemplaresRestantes > 0}">
                             <a th:href="@{/libro/disminuirLibro(isbn=${libro.isbn})}" style="margin:0;text-decoration: none;color:white;font-size:23px;padding-left: 37px;padding-right:37px;">-
                                 <!--<img src="/estilos/icons/negativo-rojo.svg" style="height: 20px;" />-->
                             </a>
@@ -60,13 +60,11 @@
                         <img src="/estilos/icons/negativo-rojo.svg" style="height: 13px;" />-->
                     </td>
                     <td class="conteiner-table__rows-alta">
-                        <img  th:if="${libro.alta == true}" src="/estilos/icons/circulo-verde.ico" alt="insertar SVG con la etiqueta image" />
                         <a th:if="${libro.alta == true}" th:href="@{/libro/darBaja(isbn=${libro.isbn})}">
-                            <img src="/estilos/icons/triangulo-rojo.png" style="height: 13px;" alt="insertar SVG con la etiqueta image" />
+                            <img src="/estilos/icons/toggle-on.png" style="height: 50px;" alt="insertar SVG con la etiqueta image" />
                         </a>
-                        <img  th:if="${libro.alta == false}" src="/estilos/icons/circulo-rojo.ico" alt="insertar SVG con la etiqueta image" />
                         <a th:if="${libro.alta == false}" th:href="@{/libro/darAlta(isbn=${libro.isbn})}">
-                            <img src="/estilos/icons/triangulo-verde.png" alt="insertar SVG con la etiqueta image" />
+                            <img src="/estilos/icons/toggle-off.png" style="height: 50px;" alt="insertar SVG con la etiqueta image" />
                         </a>
                     </td>
                     <td th:text="${libro.autor.nombre}">Mostrar Autor</td>

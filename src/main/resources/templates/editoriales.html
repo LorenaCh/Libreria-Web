@@ -13,16 +13,16 @@
     <body>
         <div class="contenedor-nav" th:replace="layout/plantilla :: header"/>   
         <div class="conteiner-crear">
-            <a th:href="@{/editorial/agregar}">Crear Editorial </a>
+            <a th:href="@{/editorial/agregar}">[[#{editoriales.crear}]]</a>
         </div>
         <div class="conteiner-table" th:if="${editoriales != null and !editoriales.empty}">
             <table>
                 <tr class="conteiner-table__header">
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Alta</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>[[#{editoriales.id}]]</th>
+                    <th>[[#{editoriales.nombre}]]</th>
+                    <th>[[#{editoriales.alta}]]</th>
+                    <th>[[#{editoriales.editar}]]</th>
+                    <th>[[#{editoriales.eliminar}]]</th>
                 </tr>
                 <tr class="conteiner-table__rows" th:each="editorial : ${editoriales}">
                     <td th:text="${editorial.id}">Mostrar Id</td>
@@ -31,13 +31,13 @@
                         <img  th:if="${editorial.alta == true}" src="/estilos/icons/check-green.png" alt="insertar SVG con la etiqueta image"/>
                         <img  th:if="${editorial.alta == false}" src="/estilos/icons/cross-red.png" alt="insertar SVG con la etiqueta image"/>
                     </td>
-                    <td><a class="conteiner-table__rows-editar" th:href="@{/editorial/editar(id=${editorial.id})}" th:text="Editar"/></td>
-                    <td><a class="conteiner-table__rows-eliminar" th:href="@{/editorial/eliminar(id=${editorial.id})}" th:text="Eliminar"/></td>
+                    <td><a class="conteiner-table__rows-editar" th:href="@{/editorial/editar(id=${editorial.id})}"/>[[#{editoriales.editar}]]</td>
+                    <td><a class="conteiner-table__rows-eliminar" th:href="@{/editorial/eliminar(id=${editorial.id})}"/>[[#{editoriales.eliminar}]]</td>
                 </tr>
             </table>
         </div>
         <div th:if="${editoriales == null or editoriales.empty}">
-            La lista de autores esta vacia
+            [[#{editoriales.lista-vacia}]]
         </div>
         <footer th:replace="layout/plantilla :: footer"></footer>
     </body>

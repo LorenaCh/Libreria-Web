@@ -6,6 +6,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="/estilos/plantilla.css" rel="stylesheet" type="text/css" />
+        <link href="/estilos/crearLibro.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <div class="contenedor-nav" th:replace="layout/plantilla :: header" />
@@ -15,55 +16,127 @@
                     <h2>Crear Libro</h2>
                 </div>
                 <form class="contenedor-principal__formulario" th:action="@{/libro/guardar}" method="post" >
+                    <!-- ISBN -->
                     <input type="hidden" name="isbn" />
+                    <!-- TITULO -->
                     <div class="contenedor-principal__formulario-titulo">
-                        <div class="contenedor-principal__formulario-titulo-entrada">
                         <label for="titulo" class="form-label">Titulo:</label>
-                        <input type="text" class="form-control" id="titulo" name="titulo"/>
-                        </div>
+                        <input type="text" class="form-control" id="titulo" name="titulo" oninput="validarInput()"/>
                     </div>
-                    <div>
-                        <div class="contenedor-principal__formulario-anio-entrada">
+                    <!-- AÑO -->
+                    <div class="contenedor-principal__formulario-anio">
                         <label for="anio" class="form-label">Año:</label>
-                        <input type="number" class="form-control" id="anio" name="anio" />
-                        </div>
+                        <input type="number" class="form-control" id="anio" name="anio" oninput="validarInput()"/>
                     </div>
-                    <div>
-                        <div class="contenedor-principal__formulario-ejemplares-entrada">
+                    <!-- EJEMPLARES -->
+                    <div class="contenedor-principal__formulario-ejemplares">
                         <label for="ejemplares" class="form-label">Ejemplares:</label>
-                        <input type="number" class="form-control" id="ejemplares" name="ejemplares"/>
-                        </div>
+                        <input type="number" class="form-control" id="ejemplares" name="ejemplares" oninput="validarInput()"/>
                     </div>
-                    <div>
-                        <div class="contenedor-principal__formulario-ejemplaresPrestados-entrada">
-                        <label for="ejemplaresPrestados" class="form-label">Ejemplares prestados:</label>
-                        <input type="number" class="form-control" id="ejemplaresPrestados" name="ejemplaresPrestados"/>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="contenedor-principal__formulario-ejemplaresRestantes-entrada">
-                        <label for="ejemplaresRestantes" class="form-label">Ejemplares Restantes:</label>
-                        <input type="number" class="form-control" id="ejemplaresRestantes" name="ejemplaresRestantes"/>
-                        </div>
-                    </div>
-                    <div>
+                    <!-- EJEMPLARES PRESTADOS -->
+                    <input type="hidden" class="form-control" id="ejemplaresPrestados" name="ejemplaresPrestados" />
+                    <!-- EJEMPLARES RESTANTES -->
+                    <input type="hidden" class="form-control" id="ejemplaresRestantes" name="ejemplaresRestantes"/>
+                    <!-- AUTOR -->
+                    <div class="contenedor-principal__formulario-autor-select">
                         <label for="autor">Autor:</label>
-                        <select id="autor" name="autorId">
-                            <option th:each="a : ${autores}" th:value="${a.id}" th:text="${a}">text</option>
+                        <select id="autor" name="autor.id" onchange="inputAutor(this);validarInput()">
+                            <option th:value="null" >Agregar autor</option>
+                            <option th:each="a : ${autores}" th:value="${a.id}" th:text="${a.nombre}">text</option>
                         </select>
                     </div>
-                    <div>
+                    <input type="hidden" id="autorId" name="autor.id" value=""/>
+                    <div id="objAutor" class="contenedor-principal__formulario-autor-nombre">
+                        <label id="etiqueta-autor-nombre">Nombre del Autor:</label>
+                        <input type="text" id="autorNombre" name="autor.nombre" value="" oninput="validarInput()"/>
+                    </div>
+                    <input type="hidden" id="autorAlta" name="autor.alta" value="true"/>
+                    <!-- EDITORIAL -->
+                    <div class="contenedor-principal__formulario-editorial-select">
                         <label for="editorial">Editorial:</label>
-                        <select id="editorial" name="editorialId">
-                            <option th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial}">text</option>
+                        <select id="editorial" name="editorial.id" onchange="inputEditorial(this);validarInput()">
+                            <option th:value="null" >Agregar editorial</option>
+                            <option th:each="editorial : ${editoriales}" th:value="${editorial.id}" th:text="${editorial.nombre}">text</option>
                         </select>
                     </div>
+                    <input type="hidden" id="editorialId" name="editorial.id" value=""/>
+                    <div id="objEditorial" class="contenedor-principal__formulario-editorial-nombre">
+                        <label id="etiqueta-editorial-nombre">Nombre de la Editorial:</label>
+                        <input type="text" id="editorialNombre" name="editorial.nombre" value="" oninput="validarInput()"/>
+                    </div>
+                    <input type="hidden" id="editorialAlta" name="editorial.alta" value="true"/>
+                    <!-- ALTA -->
+                    <input type="hidden" value="true" name="alta"/>
                     <div class="contenedor-principal__formulario-boton">
                         <a th:href="@{/libro}" id="cancelar" class="contenedor-principal__formulario-boton">Cancelar</a>
-                        <button type="submit" id="aceptar" class="contenedor-principal__formulario-boton">Aceptar</button>
+                        <button type="submit" id="aceptar" class="contenedor-principal__formulario-boton" disabled="true">Aceptar</button>
                     </div>
                 </form>
             </div>
         </div>
     </body>
 </html>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var autores = /*[[${autores}]]*/null;
+    var editoriales = /*[[${editoriales}]]*/null;
+    function inputAutor(obj) {
+        var autorIndex = obj.selectedIndex;
+        var autor = autores[autorIndex - 1];
+        if (autorIndex !== 0) {
+            document.getElementById("etiqueta-autor-nombre").style.display = "none";
+            document.getElementById("objAutor").style.padding="0px";
+            document.getElementById("autorNombre").type = "hidden";
+            document.getElementById("autorId").value = autor.id;
+            document.getElementById("autorNombre").value = autor.nombre;
+            document.getElementById("autorAlta").value = autor.alta;
+        } else {
+            document.getElementById("etiqueta-autor-nombre").style.display = "block";
+            document.getElementById("objAutor").style.padding="5px";
+            document.getElementById("autorNombre").type = "text";
+            document.getElementById("autorId").value = "";
+            document.getElementById("autorNombre").value = "";
+            document.getElementById("autorAlta").value = true;
+        }
+    }
+
+    function inputEditorial(obj) {
+        var editorialIndex = obj.selectedIndex;
+        var editorial = editoriales[editorialIndex - 1];
+        if (editorialIndex !== 0) {
+            document.getElementById("etiqueta-editorial-nombre").style.display = "none";
+            document.getElementById("objEditorial").style.padding="0px";
+            document.getElementById("editorialNombre").type = "hidden";
+            document.getElementById("editorialId").value = editorial.id;
+            document.getElementById("editorialNombre").value = editorial.nombre;
+            document.getElementById("editorialAlta").value = editorial.alta;
+        } else {
+            document.getElementById("etiqueta-editorial-nombre").style.display = "block";
+            document.getElementById("objEditorial").style.padding="5px";
+            document.getElementById("editorialNombre").type = "text";
+            document.getElementById("editorialId").value = "";
+            document.getElementById("editorialNombre").value = "";
+            document.getElementById("editorialAlta").value = true;
+        }
+    }
+
+    function validarInput() {
+        var titulo = document.getElementById("titulo").value.trim();
+        var anio = document.getElementById("anio").value.trim();
+        var ejemplares = document.getElementById("ejemplares").value.trim();
+        var autorSelected = document.getElementById("autor").selectedIndex;
+        var autorNombre = document.getElementById("autorNombre").value.trim();
+        var aceptar = document.getElementById("aceptar");
+        var editorialSelected = document.getElementById("editorial").selectedIndex;
+        var editorialNombre = document.getElementById("editorialNombre").value.trim();
+
+        if (((autorSelected === 0 && autorNombre !== "") || autorSelected !== 0) &&
+                ((editorialSelected === 0 && editorialNombre !== "") || editorialSelected !== 0) &&
+                titulo !== "" && anio !== "" && ejemplares !== "")
+            aceptar.disabled = false;
+        else
+            aceptar.disabled = true;
+    }
+    /*]]>*/
+</script>

@@ -28,4 +28,9 @@ public class AutorServicio {
     public Autor buscarPorId(Autor autor){
         return autorRepositorio.findById(autor.getId()).orElse(null);
     }
+    
+    @Transactional(readOnly=true)
+    public Autor buscarPorNombre(Autor autor){
+        return autorRepositorio.buscarPorNombre(autor.getNombre());
+    }
 }

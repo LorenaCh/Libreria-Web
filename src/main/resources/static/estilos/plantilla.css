@@ -6,6 +6,10 @@
 
 body{
     display: block;
+    background-image: url("/estilos/icons/fondo_1.jpg");
+    min-height: 100vh;
+    background-position: center; 
+background-size: cover;
 }
 .contenedor-nav{
     width: 100%;
@@ -51,7 +55,7 @@ body{
 }
 
 .contenedor-nav__item-lista a:hover{
-    color: #cccccc;
+    color: #cc99ff;
 }
 
 .contenedor-nav__item-lista{

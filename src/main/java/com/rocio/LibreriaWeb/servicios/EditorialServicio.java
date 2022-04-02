@@ -32,5 +32,8 @@ public class EditorialServicio {
     public Editorial buscarPorId(Editorial editorial){
         return editorialRepositorio.findById(editorial.getId()).orElse(null);
     }
-    
+    @Transactional(readOnly = true)
+    public Editorial buscarPorNombre(Editorial editorial){
+        return editorialRepositorio.buscarPorNombre(editorial.getNombre());
+    }
 }
